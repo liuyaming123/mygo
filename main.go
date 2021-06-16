@@ -3,13 +3,16 @@ package main
 import (
 	"fmt"
 	"gone/hello"
+	"unsafe"
 	// sli "gone/hello/myslice"
 	// "gone/bubble"
 	// "gone/countChr"
 )
 
+var p = fmt.Println
+var pf = fmt.Printf
+
 func main() {
-	var p = fmt.Println
 	p(hello.Hello())
 	// fmt.Println(sli.Sli())
 
@@ -106,13 +109,54 @@ func main() {
 	// }
 
 	// -------------------------------------------------------------------结构体-------------------------------------------------------------------
-	type Employee struct {
-		ID   int
-		Name string
-	}
+	Struct()
 
-	var yaming Employee
-	yaming.ID = 1
-	yaming.Name = "yaming"
-	p(yaming)
+	// -------------------------------------------------------------------defer-------------------------------------------------------------------
+	// p(TDefer())
 }
+
+func Clear() {
+	fmt.Println("clear resources.")
+}
+
+func TDefer() string {
+	defer Clear() // 会在return之前执行，即使有panic，也会执行
+	fmt.Println("Start...")
+	return "jaja"
+}
+
+type Employee struct {
+	ID   int
+	Name string
+	Age  int
+}
+
+func Struct() {
+	// 初始化方式
+	e := Employee{0, "Bob", 10}
+	// e := Employee{Name: "Bob", Age: 20}
+	p(e)
+
+	e2 := new(Employee) // 注意这里返回的引用（指针），相当于e := &Employee{}
+	e2.Age = 100
+	e2.ID = 2
+	e2.Name = "lily"
+	p(e2)
+	pf("e type is: %T\n", e)
+	pf("e2 type is: %T\n", e2)
+	p("addr is %x", unsafe.Pointer(&e2.Name))
+	// p(&e2.Name)
+	p(e2.String())
+}
+
+func (e *Employee) String() string { //定义结构体方法，使用指针只用一份数据，推荐使用指针
+	p("addr is %x", unsafe.Pointer(&e.Name))
+	return fmt.Sprintf("Id: %d - Name: %s - Age: %d", e.ID, e.Name, e.Age)
+}
+
+// func (e Employee) String() string { //定义结构体方法，使用原始类型会copy出一份数据， 不推荐
+// 	p("addr is %x", unsafe.Pointer(&e.Name))
+// 	return fmt.Sprintf("Id: %d - Name: %s - Age: %d", e.ID, e.Name, e.Age)
+// }
+
+// 接口：是用来定义对象之间交互的协议的。
