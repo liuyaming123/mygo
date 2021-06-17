@@ -160,3 +160,24 @@ func (e *Employee) String() string { //定义结构体方法，使用指针只�
 // }
 
 // 接口：是用来定义对象之间交互的协议的。
+
+// 变长参数的函数
+func Sum(vals ...int) int {
+	fmt.Println(vals)
+	fmt.Printf("vals type is %T\n", vals) //[]int
+	total := 0
+	for _, v := range vals {
+		total += v
+	}
+	return total
+}
+
+func IsTrue(name string) (yes1 bool, yes2 bool, err error) {
+	if len(name) > 1 {
+		yes1 = true
+	}
+	return
+}
+
+func MyInterface() {
+}
