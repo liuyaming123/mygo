@@ -76,7 +76,7 @@ func main() {
 
 	// -------------------------------------------------------------------映射-------------------------------------------------------------------
 	// m := map[string]int{}
-	m := make(map[string]int, 100) // 指定容量的定义
+	// m := make(map[string]int, 100) // 指定容量的定义
 	// m["a"] = 18  // 添加key-value
 	// m["b"] = 19
 	// p(m)
@@ -96,9 +96,9 @@ func main() {
 	// 	p("not exist!")
 	// }
 
-	if value, ok := m["a"]; !ok { // 使用!ok 或者 ok来判断元素是否在map里
-		p(value, ok)
-	}
+	// if value, ok := m["a"]; !ok { // 使用!ok 或者 ok来判断元素是否在map里
+	// 	p(value, ok)
+	// }
 
 	// for key := range m { // 只遍历map的key
 	// 	p(key, m[key])
@@ -108,11 +108,19 @@ func main() {
 	// 	p(k+":", v)
 	// }
 
-	// -------------------------------------------------------------------结构体-------------------------------------------------------------------
-	Struct()
+	// -------------------------------------------------------------------机构体-------------------------------------------------------------------
+	// Struct()
 
 	// -------------------------------------------------------------------defer-------------------------------------------------------------------
 	// p(TDefer())
+
+	// -------------------------------------------------------------------接口-------------------------------------------------------------------
+	o := &stockPosition{"Nike", 1.20, 4}
+	showValue(o)
+	// p(o.getValue())
+	var t f
+	showValue(t)
+	// p(t.getValue())
 }
 
 func Clear() {
@@ -159,8 +167,6 @@ func (e *Employee) String() string { //定义结构体方法，使用指针只�
 // 	return fmt.Sprintf("Id: %d - Name: %s - Age: %d", e.ID, e.Name, e.Age)
 // }
 
-// 接口：是用来定义对象之间交互的协议的。
-
 // 变长参数的函数
 func Sum(vals ...int) int {
 	fmt.Println(vals)
@@ -179,5 +185,27 @@ func IsTrue(name string) (yes1 bool, yes2 bool, err error) {
 	return
 }
 
-func MyInterface() {
+// 接口：是用来定义对象之间交互的协议的。
+type stockPosition struct {
+	ticket     string
+	sharePrice float32
+	count      float32
+}
+
+func (s *stockPosition) getValue() float32 {
+	return s.sharePrice * s.count
+}
+
+type valueable interface {
+	getValue() float32
+}
+
+func showValue(asset valueable) {
+	fmt.Printf("value of the asset is %f\n", asset.getValue())
+}
+
+type f float32
+
+func (s f) getValue() float32 {
+	return 0.3
 }
