@@ -115,12 +115,15 @@ func main() {
 	// p(TDefer())
 
 	// -------------------------------------------------------------------接口-------------------------------------------------------------------
-	o := &stockPosition{"Nike", 1.20, 4}
-	showValue(o)
+	// o := &stockPosition{"Nike", 1.20, 4}
+	// showValue(o)
 	// p(o.getValue())
-	var t f
-	showValue(t)
+	// var t f
+	// showValue(t)
 	// p(t.getValue())
+
+	// -------------------------------------------------------------------扩展与复用-------------------------------------------------------------------
+	MyDog()
 }
 
 func Clear() {
@@ -208,4 +211,26 @@ type f float32
 
 func (s f) getValue() float32 {
 	return 0.3
+}
+
+// 扩展与重用
+type Pet struct {
+}
+
+func (pet *Pet) Speak() {
+	p("...")
+}
+
+func (pet *Pet) SpeakTo(host string) {
+	pet.Speak()
+	p(" ", host)
+}
+
+type Dog struct {
+	Pet
+}
+
+func MyDog() {
+	d := new(Dog)
+	d.SpeakTo("hyy")
 }
