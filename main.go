@@ -2,7 +2,9 @@ package main
 
 import (
 	"fmt"
+	// "gone/feibo"
 	"gone/hello"
+
 	// "gone/myInterface"  // 多态
 	"unsafe"
 	// sli "gone/hello/myslice"
@@ -14,6 +16,7 @@ var p = fmt.Println
 var pf = fmt.Printf
 
 func main() {
+	// p(feibo.FeiBo(10))
 	p(hello.Hello())
 	// fmt.Println(sli.Sli())
 
