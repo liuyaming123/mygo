@@ -4,6 +4,7 @@ import (
 	"fmt"
 	// "gone/feibo"
 	"gone/hello"
+	// "gone/myError"
 
 	// "gone/myInterface"  // 多态
 	"unsafe"
@@ -16,6 +17,7 @@ var p = fmt.Println
 var pf = fmt.Printf
 
 func main() {
+	// myError.TError(8)
 	// p(feibo.FeiBo(10))
 	p(hello.Hello())
 	// fmt.Println(sli.Sli())
