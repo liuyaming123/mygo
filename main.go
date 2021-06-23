@@ -1,12 +1,8 @@
 package main
 
 import (
-	"bufio"
 	"fmt"
 	"io/ioutil"
-
-	// "io/ioutil"
-	"os"
 	"time"
 
 	// "gone/feibo"
@@ -260,33 +256,12 @@ func MyGroutine() {
 		}(i)
 		time.Sleep(time.Microsecond)
 	}
-
-}
-
-func MyFile(n int) {
-	// err := ioutil.WriteFile(fmt.Sprintf("t_%d.txt", n), []byte("44444444444"), 0666) //直接覆盖原来的内容
-	// if err != nil {
-	// 	fmt.Println(err)
-	// }
-
-	file, err := os.OpenFile(fmt.Sprintf("./t_%d.txt", n), os.O_CREATE|os.O_APPEND, 0666)
-	if err != nil {
-		fmt.Println(err)
-	}
-
-	defer file.Close()
-	writer := bufio.NewWriter(file)
-	writer.WriteString("中华上下五千年\n") //先写入缓存
-	writer.Flush()                  //将缓存中的内容写入文件
 }
 
 func WriteFile() {
 	for i := 0; i < 10; i++ {
 		WriteWithIoutil(fmt.Sprintf("./t_%d.txt", i), fmt.Sprintf("中华上下五千年%d\n", i))
-		p("hehe", i)
 	}
-	// MyFile(1)
-	// WriteWithIoutil("./t_x.txt", "中华上下五千年\n")
 }
 
 func WriteWithIoutil(name, content string) {
