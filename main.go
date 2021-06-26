@@ -21,6 +21,8 @@ var p = fmt.Println
 var pf = fmt.Printf
 
 func main() {
+	CC5()
+	// CC4()
 	// CC3()
 	// CC2() // 主协程结束，所有的守护协程也就结束
 	// CC1()
@@ -360,4 +362,61 @@ func CC3() {
 
 	p("Over")
 
+}
+
+func CC4() {
+	ch1 := make(chan int) //无缓冲通道
+	ch2 := make(chan int)
+	// 开启goroutine将0~100的数发送到ch1中
+	go func() {
+		for i := 0; i < 10; i++ {
+			ch1 <- i
+		}
+		close(ch1)
+	}()
+
+	// 开启goroutine从ch1中接收值，并将该值的平方发送到ch2中
+	go func() {
+		for {
+			i, ok := <-ch1
+			if !ok {
+				break
+			}
+			ch2 <- i * i
+		}
+		close(ch2)
+	}()
+
+	// 在主goroutine中从ch2中接收值打印
+	for i := range ch2 { // 通道关闭后会退出for range循环
+		p(i)
+	}
+	p(ch2) // 0xc0000820c0
+}
+
+func counter(out chan<- int) {
+	for i := 0; i < 10; i++ {
+		out <- i
+	}
+	close(out)
+}
+
+func squarer(out chan<- int, in <-chan int) {
+	for i := range in {
+		out <- i * i
+	}
+	close(out)
+}
+func printer(in <-chan int) {
+	for i := range in {
+		fmt.Println(i)
+	}
+}
+
+func CC5() {
+	ch1 := make(chan int)
+	ch2 := make(chan int)
+	go counter(ch1)
+	go squarer(ch2, ch1)
+	printer(ch2)
 }
