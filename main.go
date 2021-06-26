@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"io/ioutil"
+	"sync"
 	"time"
 
 	// "gone/feibo"
@@ -20,6 +21,8 @@ var p = fmt.Println
 var pf = fmt.Printf
 
 func main() {
+	// CC2() // 主协程结束，所有的守护协程也就结束
+	// CC1()
 	// myError.TError(8)
 	// p(feibo.FeiBo(10))
 	p(hello.Hello())
@@ -137,7 +140,7 @@ func main() {
 	// myInterface.MyIf()
 
 	// MyGroutine()
-	WriteFile()
+	// WriteFile()
 }
 
 func Clear() {
@@ -265,8 +268,52 @@ func WriteFile() {
 }
 
 func WriteWithIoutil(name, content string) {
+	defer wg.Done() // goroutine结束就登记-1
 	data := []byte(content)
 	if ioutil.WriteFile(name, data, 0644) == nil {
 		fmt.Println("写入文件成功:", content)
+	}
+}
+
+var wg sync.WaitGroup
+
+func Hello(i int) {
+	defer wg.Done() // goroutine结束就登记-1
+	fmt.Println("Hello Goroutine!", i)
+	// time.Sleep(time.Microsecond)
+}
+
+func CC1() {
+	// for i := 0; i < 10; i++ {
+	// 	wg.Add(1) // 启动一个goroutine就登记+1
+	// 	go Hello(i)
+	// }
+	// wg.Wait() // 等待所有登记的goroutine都结束
+
+	for i := 0; i < 10; i++ {
+		wg.Add(1)
+		go WriteWithIoutil(fmt.Sprintf("./t_%d.txt", i), fmt.Sprintf("中华上下五千年%d\n", i))
+	}
+	wg.Wait()
+}
+
+func CC2() {
+	// 合起来写
+	go func() {
+		i := 0
+		for {
+			i++
+			fmt.Printf("new goroutine: i = %d\n", i)
+			time.Sleep(time.Second)
+		}
+	}()
+	i := 0
+	for {
+		i++
+		time.Sleep(time.Second * 5)
+		fmt.Printf("main goroutine: i = %d\n", i)
+		if i == 2 {
+			break
+		}
 	}
 }
