@@ -7,7 +7,7 @@ import (
 	"time"
 
 	// "gone/feibo"
-	"gone/hello"
+	// "gone/hello"
 	// "gone/myError"
 
 	// "gone/myInterface"  // 多态
@@ -21,11 +21,12 @@ var p = fmt.Println
 var pf = fmt.Printf
 
 func main() {
+	// CC3()
 	// CC2() // 主协程结束，所有的守护协程也就结束
 	// CC1()
 	// myError.TError(8)
 	// p(feibo.FeiBo(10))
-	p(hello.Hello())
+	// p(hello.Hello())
 	// fmt.Println(sli.Sli())
 
 	// -------------------------------------------------------------------冒泡排序-------------------------------------------------------------------
@@ -316,4 +317,47 @@ func CC2() {
 			break
 		}
 	}
+}
+
+func recv(c chan int) {
+	defer wg.Done()
+	ret := <-c
+	p("接收成功, 接收值是:", ret)
+}
+
+func sen(c chan int) {
+	defer wg.Done()
+	c <- 'A'
+	p("发送成功")
+}
+
+func CC3() {
+	// var ch chan int
+	// p(ch) // 通道类型的控制是nil, 声明的通道后需要使用make函数初始化之后才能使用
+
+	// ch1 := make(chan int)
+	// wg.Add(2)
+	// go recv(ch1)
+	// go sen(ch1)
+	// wg.Wait()
+	// close(ch1)
+
+	c := make(chan int)
+	go func() {
+		for i := 0; i < 5; i++ {
+			c <- i
+		}
+		close(c) // 当通道被关闭时，往该通道发送值会引发panic，从该通道里接收的值一直都是类型零值
+	}()
+
+	for {
+		if data, ok := <-c; ok {
+			p(data)
+		} else {
+			break
+		}
+	}
+
+	p("Over")
+
 }
