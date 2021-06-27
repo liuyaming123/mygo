@@ -9,7 +9,7 @@ import (
 	// "gone/feibo"
 	// "gone/hello"
 	// "gone/myError"
-	"gone/goRoutinePool"
+	// "gone/goRoutinePool"
 
 	// "gone/myInterface"  // 多态
 	"unsafe"
