@@ -9,6 +9,7 @@ import (
 	// "gone/feibo"
 	// "gone/hello"
 	// "gone/myError"
+	"gone/goRoutinePool"
 
 	// "gone/myInterface"  // 多态
 	"unsafe"
@@ -21,7 +22,8 @@ var p = fmt.Println
 var pf = fmt.Printf
 
 func main() {
-	CC5()
+	// goRoutinePool.MyJob()
+	// CC5()
 	// CC4()
 	// CC3()
 	// CC2() // 主协程结束，所有的守护协程也就结束
