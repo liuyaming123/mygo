@@ -1,4 +1,4 @@
-package myjson
+package mytest
 
 import (
 	"encoding/json"
@@ -48,6 +48,9 @@ func TestJson(t *testing.T) {
 		return
 	}
 	fmt.Printf("%#v\n", c1)
+	for i, student := range c1.Students {
+		fmt.Println(i, student)
+	}
 }
 
 //Student 学生
