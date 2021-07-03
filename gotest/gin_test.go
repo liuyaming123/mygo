@@ -11,7 +11,7 @@ func TestGin(t *testing.T) {
 	r.GET("/", func(c *gin.Context) {
 		// var msg []string //定义变量
 		// type msg2 []string //定义别名
-		var msg struct {
+		var msg struct { // 匿名结构体
 			Name string `json:"name3"`
 			Age  int
 			Num  []int `json:"number"`
