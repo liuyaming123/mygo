@@ -211,29 +211,29 @@ func IsTrue(name string) (yes1 bool, yes2 bool, err error) {
 }
 
 // 接口：是用来定义对象之间交互的协议的。
-type stockPosition struct {
-	ticket     string
-	sharePrice float32
-	count      float32
-}
+// type stockPosition struct {
+// 	ticket     string
+// 	sharePrice float32
+// 	count      float32
+// }
 
-func (s *stockPosition) getValue() float32 {
-	return s.sharePrice * s.count
-}
+// func (s *stockPosition) getValue() float32 {
+// 	return s.sharePrice * s.count
+// }
 
-type valueable interface {
-	getValue() float32
-}
+// type valueable interface {
+// 	getValue() float32
+// }
 
-func showValue(asset valueable) {
-	fmt.Printf("value of the asset is %f\n", asset.getValue())
-}
+// func showValue(asset valueable) {
+// 	fmt.Printf("value of the asset is %f\n", asset.getValue())
+// }
 
-type f float32
+// type f float32
 
-func (s f) getValue() float32 {
-	return 0.3
-}
+// func (s f) getValue() float32 {
+// 	return 0.3
+// }
 
 // 扩展与重用
 type Pet struct {
@@ -323,17 +323,17 @@ func CC2() {
 	}
 }
 
-func recv(c chan int) {
-	defer wg.Done()
-	ret := <-c
-	p("接收成功, 接收值是:", ret)
-}
+// func recv(c chan int) {
+// 	defer wg.Done()
+// 	ret := <-c
+// 	p("接收成功, 接收值是:", ret)
+// }
 
-func sen(c chan int) {
-	defer wg.Done()
-	c <- 'A'
-	p("发送成功")
-}
+// func sen(c chan int) {
+// 	defer wg.Done()
+// 	c <- 'A'
+// 	p("发送成功")
+// }
 
 func CC3() {
 	// var ch chan int
