@@ -25,6 +25,9 @@ func TestString(t *testing.T) {
 
 	fmt.Printf("字节编码: %#v\n", []byte("pr博客"))
 	fmt.Printf("utf-8编码: %#v\n", []rune("pr博客"))
+
+	fmt.Printf("%#v\n", []byte("支付成功"))
+	fmt.Println(string([]byte{0xe6, 0x94, 0xaf, 0xe4, 0xbb, 0x98, 0xe6, 0x88, 0x90, 0xe5, 0x8a, 0x9f}))
 }
 
 func TestSqrtDemo(t *testing.T) {

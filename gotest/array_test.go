@@ -8,7 +8,7 @@ import (
 )
 
 func TestArray(t *testing.T) {
-	a := [...]struct { // 结构体类型的数组
+	a := [...]struct { // 元素是结构体类型的数组
 		name string
 		age  int
 	}{
@@ -33,8 +33,8 @@ func TestArray(t *testing.T) {
 	// IndexValue1(a1, 8)
 	// IndexValue2(a1, 8)
 
-	a2 := []int{}
-	fmt.Println(IndexValue1(GenSlice(a2), 100))
+	// a2 := []int{}
+	// fmt.Println(IndexValue1(GenSlice(a2), 100))
 	// fmt.Println(IndexValue2(GenSlice(a2), 100))
 
 }
@@ -107,4 +107,15 @@ func GenSlice(a []int) []int {
 		a = append(a, rand.Intn(1000))
 	}
 	return a
+}
+
+func TestArrSli(t *testing.T) {
+	array := [4]int{10, 20, 30, 40}
+	slice := array[0:2]
+	newSlice := append(slice, 50)
+	fmt.Printf("one slice = %v, Pointer = %p, len = %d, cap = %d\n", slice, &slice, len(slice), cap(slice))
+	fmt.Printf("one newSlice = %v, Pointer = %p, len = %d, cap = %d\n", newSlice, &newSlice, len(newSlice), cap(newSlice))
+	newSlice[1] += 10
+	fmt.Printf("two slice = %v, Pointer = %p, len = %d, cap = %d\n", slice, &slice, len(slice), cap(slice))
+	fmt.Printf("two newSlice = %v, Pointer = %p, len = %d, cap = %d\n", newSlice, &newSlice, len(newSlice), cap(newSlice))
 }
