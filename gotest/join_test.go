@@ -27,6 +27,6 @@ func TestJoin(t *testing.T) {
 	start2 := time.Now()
 	test2 := strings.Join(list, " ")
 	end2 := time.Since(start2)
-	println(test2[:100])
-	println(end2)
+	fmt.Println(test2[:100])
+	fmt.Println(end2)
 }
