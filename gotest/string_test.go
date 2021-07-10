@@ -3,6 +3,7 @@ package gotest
 import (
 	"fmt"
 	"math"
+	"strings"
 	"testing"
 )
 
@@ -46,4 +47,23 @@ func TestModifyString(t *testing.T) {
 	sNew := string(sByte)
 	fmt.Println(sNew)
 	fmt.Println(&s == &sNew) // false
+}
+
+func TestTansfer(t *testing.T) {
+	p := fmt.Println
+	p("Contains: ", strings.Contains("test", "es"))
+	p("Count: ", strings.Count("test", "t"))
+	p("HasPrefix: ", strings.HasPrefix("test", "te"))
+	p("HasSuffix: ", strings.HasSuffix("test", "st"))
+	p("ToLower: ", strings.ToLower("TEst"))
+	p("ToUpper: ", strings.ToUpper("TEst"))
+	p("char: ", "hello"[1])                                 // 101
+	p("Index: ", strings.Index("tesst", "s"))               // 第一个出现该字符的index
+	p("Join: ", strings.Join([]string{"A", "B", "C"}, "-")) // 数组不能只用join操作
+	p("Replace: ", strings.Replace("asss", "s", "y", -1))   // -1表示全部替换
+	p("Replace: ", strings.Replace("assss", "s", "y", 2))   // 正整数表示依次替换几次
+
+	s1 := strings.Split("a,b,c", ",")
+	p("Split: ", s1)
+	fmt.Printf("%T", s1) // slice类型
 }

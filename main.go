@@ -76,22 +76,6 @@ func main() {
 	// }
 	// fmt.Println(cnt)
 
-	// p("Contains: ", s.Contains("test", "es"))
-	// p("Count: ", s.Count("test", "t"))
-	// p("HasPrefix: ", s.HasPrefix("test", "te"))
-	// p("HasSuffix: ", s.HasSuffix("test", "st"))
-	// p("ToLower: ", s.ToLower("TEst"))
-	// p("ToUpper: ", s.ToUpper("TEst"))
-	// p("char: ", "hello"[1])                         // 101
-	// p("Index: ", s.Index("tesst", "s"))             // 第一个出现该字符的index
-	// p("Join: ", s.Join([]string{"A", "B"}, "-"))    // 数组不能只用join操作
-	// p("Replace: ", s.Replace("asss", "s", "y", -1)) // -1表示全部替换
-	// p("Replace: ", s.Replace("assss", "s", "y", 2)) // 正整数表示依次替换几次
-
-	// s1 := s.Split("a,b,c", ",")
-	// p("Split: ", s1)
-	// fmt.Printf("%T", s1) // slice类型
-
 	// -------------------------------------------------------------------映射-------------------------------------------------------------------
 	// m := map[string]int{}
 	// m := make(map[string]int, 100) // 指定容量的定义
