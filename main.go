@@ -22,7 +22,7 @@ var p = fmt.Println
 var pf = fmt.Printf
 
 func main() {
-	thisHello() // main包默认不导入main包里的其他文件，go build后可正常运行
+	// thisHello() // main包默认不导入main包里的其他文件，go build后可正常运行
 	// goRoutinePool.MyJob()
 	// CC5()
 	// CC4()
