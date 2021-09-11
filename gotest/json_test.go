@@ -7,14 +7,14 @@ import (
 )
 
 type Student struct {
-	Id     int
-	Gender string
-	Name   string
+	Id     int    `json:"id"`
+	Gender string `json:"gender"`
+	Name   string `json:"name"`
 }
 
 type Class struct {
-	Title    string
-	Students []*Student
+	Title    string     `json:"title"`
+	Students []*Student `json:"students"`
 }
 
 func TestJson(t *testing.T) {
@@ -49,7 +49,7 @@ func TestJson(t *testing.T) {
 	}
 	fmt.Printf("%#v\n", c1)
 	for i, student := range c1.Students {
-		fmt.Println(i, student)
+		fmt.Println(i, fmt.Sprintf("%#v", *student))
 	}
 }
 
