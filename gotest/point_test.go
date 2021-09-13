@@ -13,6 +13,12 @@ func modify2(x *int) {
 	*x = 100
 }
 
+type staff struct {
+	Id     int    `json:"id"`
+	Gender string `json:"gender"`
+	Name   string `json:"name"`
+}
+
 func TestPoint(t *testing.T) {
 	// a := 10
 	// b := &a
@@ -57,4 +63,16 @@ func TestPoint(t *testing.T) {
 
 	cc := new(int)
 	fmt.Println(cc, *cc)
+
+	// 没有初始化的指针变量不能直接赋值
+	// var st *staff  // 这一步只是声明了一个指针类型的变量，没有初始化
+	// st := &staff{} // 声明指针变量并初始化staff为: &gotest.staff{Id:0, Gender:"", Name:""}
+	st := new(staff) // 声明指针变量并初始化staff为: &gotest.staff{Id:0, Gender:"", Name:""}
+	getStaff(st)
+	fmt.Printf("staff: %#v\n", st)
+}
+
+func getStaff(s *staff) {
+	s.Id = 44
+	s.Gender = "男"
 }
