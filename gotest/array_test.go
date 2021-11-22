@@ -137,3 +137,15 @@ func TestMonth(t *testing.T) {
 		字符串的切片操作和[]byte字节类型切片的切片操作是类似的。都写作x[m:n]，并且都是返回一个原始字节序列的子序列，底层都是共享之前的底层数组，因此这种操作都是常量时间复杂度。x[m:n]切片操作对于字符串则生成一个新字符串，如果x是[]byte的话则生成一个新的[]byte。
 	*/
 }
+
+func reverse(s []int) {
+	for i, j := 0, len(s)-1; i < j; i, j = i+1, j-1 {
+		s[i], s[j] = s[j], s[i]
+	}
+}
+
+func TestReverse(t *testing.T) {
+	a := []int{1, 3, 5, 7, 9, 11}
+	reverse(a)
+	fmt.Println(a)
+}
