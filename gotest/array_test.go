@@ -119,3 +119,21 @@ func TestArrSli(t *testing.T) {
 	fmt.Printf("two slice = %v, Pointer = %p, len = %d, cap = %d\n", slice, &slice, len(slice), cap(slice))
 	fmt.Printf("two newSlice = %v, Pointer = %p, len = %d, cap = %d\n", newSlice, &newSlice, len(newSlice), cap(newSlice))
 }
+
+func TestMonth(t *testing.T) {
+	months := [...]string{1: "Jan", 2: "Feb", 3: "Mar", 4: "Apr", 5: "May", 6: "Jun", 7: "Jul", 8: "Aug", 9: "Sep", 10: "Oct", 11: "Nov", 12: "Dec"}
+	for i, m := range months {
+		fmt.Println(i, m)
+	}
+
+	Q2 := months[4:7]
+	fmt.Println(Q2, len(Q2), cap(Q2)) // [Apr May Jun] 3 9
+
+	// 如果切片操作超出cap(s)的上限将导致一个panic异常，但是超出len(s)则是意味着扩展了slice，因为新slice的长度会变大
+	fmt.Println(Q2[:5]) // 输出: [Apr May Jun Jul Aug];  explain: extend a slice (within capacity)
+	// fmt.Println(Q2[:10]) // panic: out of range
+
+	/*
+		字符串的切片操作和[]byte字节类型切片的切片操作是类似的。都写作x[m:n]，并且都是返回一个原始字节序列的子序列，底层都是共享之前的底层数组，因此这种操作都是常量时间复杂度。x[m:n]切片操作对于字符串则生成一个新字符串，如果x是[]byte的话则生成一个新的[]byte。
+	*/
+}
