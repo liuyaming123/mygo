@@ -145,7 +145,14 @@ func reverse(s []int) {
 }
 
 func TestReverse(t *testing.T) {
-	a := []int{1, 3, 5, 7, 9, 11}
+	a := []int{1, 3, 5, 7, 9}
 	reverse(a)
 	fmt.Println(a)
+
+	// slice动态扩容机制
+	fmt.Println(a)
+	fmt.Println(cap(a)) // 5  首次容量为初始化的slice长度
+	a = append(a, 2, 3, 4, 4, 4, 6, 2, 4)
+	fmt.Println(a)
+	fmt.Println(cap(a)) // 为了提高内存使用效率，append超过原容量时，新数组分配的容量会略大于数组长度
 }
