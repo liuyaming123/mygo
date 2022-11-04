@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"sync"
 	"testing"
+	"time"
 )
 
 func TestM1(t *testing.T) {
@@ -36,13 +37,13 @@ func TestM3(t *testing.T) {
 
 	// 开N个后台打印线程
 	// wg.Add(4)
-	for i := 0; i < 100; i++ {
+	for i := 0; i < 10; i++ {
 		wg.Add(1) // 增加等待事件的个数，必须确保在后台线程启动之前执行
 
-		go func() {
-			fmt.Println("hello, world!")
+		go func(n int) {
+			fmt.Println(n, "-- hello, world!")
 			wg.Done() // 表示完成一个事件
-		}()
+		}(i)
 	}
 
 	wg.Wait() // 等待全部的事件完成
@@ -54,3 +55,62 @@ func TestM3(t *testing.T) {
 // 	go performSnap(i, shotRate, outInfo.SnapshotInfo.StartTime, snapShotCmd, filePath, outputPath, &wg, tc.task.Vid)
 // }
 // wg.Wait()
+
+func TestM4(t *testing.T) {
+	n := make(chan int)
+	q := make(chan int)
+
+	go func() {
+		for i := 0; ; i++ {
+			n <- i
+		}
+	}()
+
+	go func() {
+		for {
+			x := <-n
+			q <- x * x
+		}
+	}()
+
+	for {
+		fmt.Println(<-q)
+		if <-q > 1000 {
+			break
+		}
+	}
+
+}
+
+func TestM5(t *testing.T) {
+	// 交替打印 p w d
+
+	c1 := make(chan string)
+	c2 := make(chan string)
+	c3 := make(chan string)
+
+	go func() {
+		for {
+			c1 <- "p"
+			fmt.Println(<-c3)
+
+		}
+	}()
+
+	go func() {
+		for {
+			fmt.Println(<-c1)
+			c2 <- "w"
+		}
+	}()
+
+	go func() {
+		for {
+			fmt.Println(<-c2)
+			c3 <- "d\n"
+		}
+	}()
+
+	time.Sleep(time.Millisecond)
+
+}
